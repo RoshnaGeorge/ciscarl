@@ -209,9 +209,10 @@ def summarise(raw, baseline="V0"):
     return pd.DataFrame(out)
 
 
-def _holm(df, col="p"):
+def _holm(df, col="p", exclude=("V0",)):
     df = df.copy()
-    order = df[col].sort_values().index
+    mask = ~df["variant"].isin(exclude)
+    order = df.loc[mask, col].sort_values().index
     m = len(order)
     adj = np.empty(m)
     running = 0.0
@@ -220,7 +221,8 @@ def _holm(df, col="p"):
         running = max(running, val)
         adj[i] = running
     df["p_holm"] = np.nan
-    df.loc[order, "p_holm"] = adj
+    if m:
+        df.loc[order, "p_holm"] = adj
     return df
 
 
@@ -275,8 +277,9 @@ def main(argv=None):
                      support=("support", "mean"))
                 .reset_index())
     else:
-        summ = _holm(summarise(raw))
-        summ = summ.sort_values(["kind", "d_mae"])
+        base = summarise(raw)
+        summ = pd.concat([_holm(g) for _, g in base.groupby("kind")],
+                         ignore_index=True).sort_values(["kind", "d_mae"])
     summ.to_csv(os.path.join(root, "results", f"{tag}_summary.csv"), index=False)
 
     print(f"\n=== Gate 30 ({args.mode}) — {args.reps} reps ===")

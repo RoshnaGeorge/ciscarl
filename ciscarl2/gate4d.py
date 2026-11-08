@@ -30,12 +30,10 @@ from . import dgp
 from .estimators import (aipw, crossfit_nuisances, phi_on_holdout,
                          truncate_weights)
 from .gate2 import TAU, pseudo_outcome
-from .gate4 import REPO, scre_select_alpha
+from .gate4 import scre_select_alpha
 from .rules import dedup, eval_rule, prune, rules_from_ensemble, stability_scores
 
-if REPO not in sys.path:
-    sys.path.insert(0, REPO)
-from scre import SurvivalCausalRuleEnsemble          # noqa: E402
+from .external.scre import SurvivalCausalRuleEnsemble          # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)

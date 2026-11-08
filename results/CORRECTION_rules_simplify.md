@@ -96,5 +96,5 @@ consistent with the corrected Gates 16–18, but the exact figures are stale.
 Gate 4d/7 used the same utility through the RF pipeline and carry the same
 caveat.
 
-Every table in `CLAIMS_v1.7.md` and `paper/DRAFT.md` uses corrected numbers from
-Gates 16–19 only.
+Every table in the current claims file (`results/CLAIMS_v1.17.md`) and in the
+detailed paper uses corrected numbers from Gates 16–19 only.

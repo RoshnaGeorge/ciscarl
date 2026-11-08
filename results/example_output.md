@@ -1,6 +1,7 @@
 # What CISCaRL v1.3 output actually looks like
 
-Produced by `python -m ciscarl2.demo_actg175` on the real ACTG175 data.
+Produced by the frozen C200 pipeline on the real ACTG175 data (recorded from the
+v1.3 console output; the module was retired in the final release).
 
 ```
 CISCaRL v1.3  |  ACTG175 arms 0 vs 1

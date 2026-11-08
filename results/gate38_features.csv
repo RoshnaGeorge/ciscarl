@@ -1,0 +1,5 @@
+n_features,features,support,fallback,rule,n_conditions,val_effect,val_se,val_lcb,asm_effect,asm_lo,asm_hi,asm_n,method
+12,"cd40, cd80, age, wtkg, karnof, hemo, homo, race, gender, drugs, str2, symptom",61,True,cd40 <= 407.5 & wtkg > 71.0 & homo <= 0.5,3,0.11636960394742187,0.22246254154848916,-0.24954871437945314,0.4012617871039662,0.03288707818558545,0.769636496022347,38,12
+16,"cd40, cd80, age, wtkg, karnof, hemo, homo, race, gender, drugs, str2, symptom, oprior, z30, preanti, strat",61,True,cd40 <= 407.5 & wtkg > 71.0 & homo <= 0.5,3,0.11027932923335611,0.2229651192103847,-0.25646565578351255,0.40271288776720765,0.03202823585285103,0.7733975396815642,38,16
+12,"cd40, cd80, age, wtkg, karnof, hemo, homo, race, gender, drugs, str2, symptom",61,True,cd40 <= 407.5 & wtkg > 71.0 & homo <= 0.5,3,0.11636960394742187,0.22246254154848916,-0.24954871437945314,0.4012617871039662,0.03288707818558545,0.769636496022347,38,lasso
+11,"cd40, cd80, wtkg, karnof, hemo, homo, race, gender, drugs, str2, symptom",79,True,cd80 > 805.0 & race > 0.5,2,0.1482057271230689,0.18009998193967636,-0.14803238138430241,0.43084867621608647,0.11776192350476022,0.7439354289274127,45,rfe

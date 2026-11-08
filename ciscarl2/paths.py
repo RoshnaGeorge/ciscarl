@@ -3,7 +3,7 @@
 Priority:
 1. the ACTG175_PATH environment variable, if it points at a file;
 2. <repo>/data/ACTG175.csv (the copy shipped with this repository);
-3. the author's historical location, kept only as a fallback.
+3. <repo>/ACTG175.csv (root copy).
 """
 import os
 from pathlib import Path
@@ -17,7 +17,7 @@ def data_path() -> str:
         return str(Path(env))
     for candidate in (
         _HERE.parent / "data" / "ACTG175.csv",
-        Path.home() / "Downloads" / "Machine-Learning-Project" / "data" / "ACTG175.csv",
+        _HERE.parent / "ACTG175.csv",
     ):
         if candidate.exists():
             return str(candidate)

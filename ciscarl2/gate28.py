@@ -37,7 +37,7 @@ from .gate26 import _calibrate_kind, _sim_kind
 from .rules import eval_rule
 
 try:
-    from scre import SurvivalCausalRuleEnsemble              # noqa: E402
+    from .external.scre import SurvivalCausalRuleEnsemble              # noqa: E402
 except Exception:                                            # noqa: BLE001
     SurvivalCausalRuleEnsemble = None
 

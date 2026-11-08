@@ -41,18 +41,10 @@ from .estimators import (crossfit_nuisances, ipcw_outcome, phi_on_holdout,
 from .gate2 import TAU, pseudo_outcome
 from .rules import dedup, eval_rule, prune, rules_from_ensemble, stability_scores
 
-# The SCRE baseline is an external package. Point SCRE_PATH at the directory
-# that contains it (the folder holding `scre/`), or install it on sys.path.
-_CANDIDATES = [os.environ.get("SCRE_PATH", ""),
-               os.path.join(os.path.expanduser("~"), "Downloads",
-                            "Machine-Learning-Project", "python")]
-for _c in _CANDIDATES:
-    if _c and os.path.isdir(_c) and _c not in sys.path:
-        sys.path.insert(0, _c)
-# kept for other modules that import it
-REPO = next((c for c in _CANDIDATES if c and os.path.isdir(c)), _CANDIDATES[-1])
+# The SCRE baseline ships with this repository as ciscarl2/external/scre.py.
+REPO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "external")
 try:                                                        # noqa: E402
-    from scre import SurvivalCausalRuleEnsemble, _eval_rule
+    from .external.scre import SurvivalCausalRuleEnsemble, _eval_rule
     _SCRE_IMPORT_ERROR = None
 except Exception as _exc:                                   # noqa: BLE001
     SurvivalCausalRuleEnsemble = None

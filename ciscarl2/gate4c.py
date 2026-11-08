@@ -57,12 +57,10 @@ from sklearn.model_selection import train_test_split
 
 from . import dgp
 from .gate2 import TAU, pseudo_outcome
-from .gate4 import REPO, _scre_design, scre_select_alpha
+from .gate4 import _scre_design, scre_select_alpha
 from .estimators import crossfit_nuisances, phi_on_holdout, truncate_weights
 
-if REPO not in sys.path:
-    sys.path.insert(0, REPO)
-from scre import SurvivalCausalRuleEnsemble          # noqa: E402
+from .external.scre import SurvivalCausalRuleEnsemble          # noqa: E402
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
