@@ -145,7 +145,7 @@ Full tables and decisions: `results/EVIDENCE_EXTENSION.md`, `gate31_*`,
   effect (+0.251) but worse LCB (−0.167) and 1.6× the variability; 965 is worst
   (−0.206). 730 retained on stability, not convention.
 
-## CART tuning and ensembles (Gates 45–47)
+## Post-freeze tuning, ensembles and explainability (Gates 45–48)
 
 * Gate 45: 540-configuration nested tuning on ACTG175 discovery selected
   depth 5 / leaf 30 / squared error (nested MAE 0.85982 vs 0.86379 for the
@@ -160,3 +160,15 @@ Full tables and decisions: `results/EVIDENCE_EXTENSION.md`, `gate31_*`,
   abstains; the frozen tree selects 61, LCB −0.250, assessment +0.401. No
   alternative produced a certifiable subgroup, so the frozen CART
   (3 / 60 / squared error) remains.
+
+## Explainability (Gate 48)
+
+* Exact TreeSHAP on the final CART: cd40 0.128, homo 0.093, cd80 0.057,
+  wtkg 0.035 mean absolute SHAP; all other features zero. The rule uses cd40,
+  wtkg and homo; cd80 is the fourth split feature. race and gender have zero
+  global SHAP.
+* LIME (40 patients, 5 seeds, raw scale): SHAP–LIME top-5 overlap 0.767 inside
+  the rule and 0.700 outside; LIME stability 0.703 inside and 0.712 outside.
+  Moderate agreement, not definitive.
+* Decision: no model change; SHAP and LIME are secondary explanations. The rule
+  remains the primary explanation.

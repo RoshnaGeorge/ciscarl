@@ -201,7 +201,7 @@ p(doc, "", space_after=0)
 p(doc, "", space_after=0)
 note = doc.add_paragraph()
 note.alignment = WD_ALIGN_PARAGRAPH.CENTER
-set_run(note.add_run("This guide covers all 83 code files in the project, the 31 notebook steps, "
+set_run(note.add_run("This guide covers all 84 code files in the project, the 31 notebook steps, "
                      "and every non-code area: data, results, figures, reports and configuration."),
         12, italic=True)
 
@@ -215,10 +215,10 @@ table = doc.add_table(rows=0, cols=2)
 table.style = "Table Grid"
 table.alignment = WD_TABLE_ALIGNMENT.CENTER
 rows = [
-    ("Code files explained", "83 of 83: ciscarl2 (73), ciscarl2/external (2), run_all.py (1), paper builders and content (7)"),
+    ("Code files explained", "84 of 84: ciscarl2 (74), ciscarl2/external (2), run_all.py (1), paper builders and content (7)"),
     ("Notebook steps", "31 of 31, each with code, plain explanation, result and decision"),
-    ("Result files", "288 files: 120 Markdown records and 163 CSV tables, plus 4 historical records"),
-    ("Paper figures", "30 files: 15 PNG and 15 PDF versions"),
+    ("Result files", "293 files: 121 Markdown records and 167 CSV tables"),
+    ("Paper figures", "38 files: 19 PNG and 19 PDF versions"),
     ("Report exhibits", "42 images: 38 exact console screenshots and 4 notebook plots"),
     ("Docs and config", "README, requirements, .gitignore, LICENSE, data, notebook, report, paper"),
 ]
@@ -263,7 +263,7 @@ h = doc.add_heading("Part A — Every code file", level=1)
 h.paragraph_format.page_break_before = False
 
 GROUP_ORDER = ["Core model", "Gates 1–4", "Gates 5–15", "Gates 16–30",
-               "Gates 31–44", "Gates 45–47", "Diagnostics and variants",
+               "Gates 31–44", "Gates 45–48", "Diagnostics and variants",
                "External and build"]
 
 for group in GROUP_ORDER:
@@ -333,7 +333,7 @@ for label, text in (
                                                            "10 tables."),
     ("paper/CISCaRL_Model_Creation_31_Steps_Detailed.docx/.pdf: ", "the 42-page step-by-step report "
                                                                    "with 52 exact exhibits."),
-    ("paper/figs/: ", "30 files: 15 PNG and 15 PDF figures generated from the result CSVs."),
+    ("paper/figs/: ", "38 files: 19 PNG and 19 PDF figures generated from the result CSVs."),
     ("paper/exhibits/: ", "42 images used by the 31-step report: 38 console screenshots and 4 plots."),
     ("paper/*.py: ", "the builders and content files for the figures, the IEEE paper and the "
                      "31-step report."),

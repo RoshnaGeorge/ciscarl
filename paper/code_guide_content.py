@@ -383,24 +383,30 @@ ENTRIES = [
      "discovery, not representability."),
 
     # ---------------------------------------------------------------- gates 45-47
-    ("Gates 45–47", "Tested and rejected", "ciscarl2/gate45.py",
+    ("Gates 45–48", "Tested and rejected", "ciscarl2/gate45.py",
      "The broad CART tuning experiment.",
      "Runs 540 configurations over depth, leaf size, split criterion and pruning, with the "
      "nuisance models refitted inside every outer fold.",
      "Best nested MAE is 0.85982 for depth 5 / leaf 30 / squared error, against 0.86379 for the "
      "frozen depth 3 / leaf 60 (rank 54 of 540). It was not adopted on prediction error alone."),
-    ("Gates 45–47", "Tested and rejected", "ciscarl2/gate46.py",
+    ("Gates 45–48", "Tested and rejected", "ciscarl2/gate46.py",
      "The ensemble-versus-CART comparison.",
      "Distils random forest, extra trees, gradient boosting, histogram boosting and a ridge stack "
      "into a depth-3 rule, then applies the same support and commitment protocol.",
      "No ensemble gains capture with a 95% interval above zero; costs are 4.8–65.9 s against 0.07 s "
      "for CART. CART is retained."),
-    ("Gates 45–47", "Tested and rejected", "ciscarl2/gate47.py",
+    ("Gates 45–48", "Tested and rejected", "ciscarl2/gate47.py",
      "CART tuning on simulated subgroup performance.",
      "Evaluates 48 CART configurations on the same 20 splits × 2 DGPs, selecting on validation LCB "
      "with purity, capture and interpretability guardrails.",
      "Depth 2 / absolute error is best in simulation (LCB +0.0605/+0.0731), but on ACTG175 it "
      "selects 122 patients, LCB −0.210 and abstains. The frozen tree remains."),
+    ("Gates 45–48", "Final evidence", "ciscarl2/gate48.py",
+     "The SHAP and LIME explainability audit.",
+     "Runs exact TreeSHAP on the final CART, LIME on 40 rule-in/rule-out patients with five seeds, "
+     "and compares top features, stability and group-wise SHAP.",
+     "SHAP: cd40 0.128, homo 0.093, cd80 0.057, wtkg 0.035; all other features zero. "
+     "SHAP–LIME overlap 0.767/0.700; LIME stability 0.703/0.712. No model change."),
 
     # ---------------------------------------------------------------- external and builders
     ("External and build", "External dependency", "ciscarl2/external/scre.py",

@@ -359,6 +359,40 @@ for i, step in enumerate(STEPS, 1):
     end.paragraph_format.space_after = Pt(6)
     para_border(end, size=4, color="A0A0A0")
 
+doc.add_page_break()
+h = doc.add_heading("Addendum — post-freeze tuning and explainability", level=1)
+h.paragraph_format.page_break_before = False
+p(doc, ("After the 31 steps were frozen, four additional audits were run. None of them changed the "
+        "final rule or decision; they record what was tested and what failed."))
+
+for text in (
+    "Gate 45 tuned 540 CART configurations on ACTG175 discovery. The lowest nested MAE was 0.85982 "
+    "for depth 5 / leaf 30, against 0.86379 for the frozen depth 3 / leaf 60 (rank 54 of 540). The "
+    "gain was small and required five conditions, so it was not adopted.",
+    "Gate 46 compared CART with random forest, extra trees, gradient boosting, histogram gradient "
+    "boosting and a ridge stack. No ensemble had a capture gain with a 95% interval above zero, and "
+    "costs were 4.8–65.9 s versus 0.07 s for CART. CART was retained.",
+    "Gate 47 tuned 48 CART configurations on simulated subgroup performance. Depth 2 / absolute error "
+    "won in simulation (validation LCB +0.0605/+0.0731), but on ACTG175 it selected 122 patients, had "
+    "LCB −0.210 and abstained. The frozen tree remained.",
+    "Gate 48 ran exact TreeSHAP on the final CART and LIME on 40 rule-in/rule-out patients. SHAP "
+    "ranked cd40 0.128, homo 0.093, cd80 0.057 and wtkg 0.035; all other features were zero. "
+    "SHAP–LIME top-5 overlap was 0.767 inside the rule and 0.700 outside; LIME stability across seeds "
+    "was 0.703/0.712. This is moderate agreement, so the readable rule remains the primary "
+    "explanation and SHAP/LIME are secondary audits.",
+):
+    q = doc.add_paragraph(style="List Bullet")
+    set_run(q.add_run(text), 12)
+    q.paragraph_format.space_after = Pt(2)
+
+exhibit(doc, ROOT / "paper" / "figs" / "fig_gate48_shap_global.png",
+        "SHAP global importance on the final CART. Only the four split features have non-zero values.",
+        max_w=15.0, max_h=13.0)
+exhibit(doc, ROOT / "paper" / "figs" / "fig_gate48_lime_example.png",
+        "LIME explanation for one assessment patient, on the raw covariate scale. The local top features "
+        "overlap the rule but LIME is not stable enough to replace it.",
+        max_w=15.0, max_h=11.0)
+
 # final
 doc.add_page_break()
 h = doc.add_heading("Final summary", level=1)

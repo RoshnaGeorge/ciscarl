@@ -75,6 +75,7 @@ def full_commands(jobs=None):
         ("Gate 45  CART hyperparameter tuning", gate("gate45")),
         ("Gate 46  ensemble versus CART", gate("gate46", "--reps", "20", *j)),
         ("Gate 47  CART tuning on subgroup performance", gate("gate47", "--reps", "20", *j)),
+        ("Gate 48  SHAP and LIME explainability", gate("gate48", "--n-lime", "40", "--seeds", "5")),
     ]
     return cmds
 

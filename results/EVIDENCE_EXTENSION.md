@@ -217,3 +217,23 @@ depth-4 / leaf-30 fallback with support 35 commits (assessment +0.092).
 **Decision:** the frozen CART (depth 3, leaf 60, squared error) remains. The
 tuning and ensemble alternatives either lose purity/capture, cost far more, or
 cannot produce a certifiable subgroup on ACTG175.
+
+## Gate 48 — SHAP and LIME explainability audit
+
+Exact TreeSHAP on the final CART (assessment partition) ranks cd40 (0.128),
+homo (0.093), cd80 (0.057) and wtkg (0.035) as the only non-zero contributors.
+The rule uses cd40, wtkg and homo; cd80 is the additional split feature.
+`race` and `gender` have zero global SHAP.
+
+LIME was run on 40 assessment patients (20 inside the rule, 20 outside), five
+seeds per patient, on the raw covariate scale. Top-5 SHAP–LIME overlap is 0.767
+inside and 0.700 outside; LIME top-5 stability across seeds is 0.703 inside and
+0.712 outside. This is **moderate, not high** agreement: LIME is a local aid,
+not a definitive attribution.
+
+Group-wise mean absolute SHAP is similar across race and gender (cd40 0.127 vs
+0.132; wtkg 0.031 vs 0.044), but group sizes are small and this is descriptive,
+not a fairness claim.
+
+**Decision:** no model change. SHAP and LIME are secondary explainability
+evidence; the readable rule remains the primary explanation.
