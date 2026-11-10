@@ -72,7 +72,7 @@ sandbox and never touches `results/`.
   32 (learners), 33 (calibration/intervals + confirmation), 34 (folds),
   35 (fairness/SHAP/transport), 36 (TMLE), 37 (horizon), 38 (features),
   39 (learned stacking), 40 (SCRE alpha path), 41 (selection-aware intervals),
-  42-44 (horizon optimisation and stability).
+  42-44 (horizon optimisation and stability), 45-47 (CART tuning and ensembles).
 
 Gates 1-22 are historical evidence; run any of them directly, for example:
 
@@ -100,6 +100,9 @@ its numbers are reproduced by the gates and checked against
 | Gate 40 | 960100–960109 |
 | Gate 39 | 970100–970109 |
 | Gate 44 | 2024–2043 |
+| Gate 45 | ACTG175 discovery; split seeds 2024/2025 |
+| Gate 46 | 980100–980119 |
+| Gate 47 | 990100–990119 |
 | policy | 700100 |
 | SCRE head-to-head | 300100–300139 |
 | Gate 30 tuning / confirmation | 310100–310139 / 320100–320139 |

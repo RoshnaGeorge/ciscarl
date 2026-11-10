@@ -71,13 +71,17 @@ def nested_cv(X, A, T, E, disc, configs, outer_folds=5, inner_folds=5):
         G_va = np.maximum(G_va, 1.0 / min(float(cap.max()), CAP_CEILING))
         psi_va = pseudo_outcome(AD[va], TD[va], HORIZON, mu_va, G_va)
 
-        for depth, leaf, crit in configs:
+        for cfg in configs:
+            depth, leaf, crit = cfg[:3]
+            alpha = float(cfg[3]) if len(cfg) > 3 else 0.0
             tree = DecisionTreeRegressor(max_depth=depth, min_samples_leaf=leaf,
-                                         criterion=crit, random_state=0).fit(XD[tr], psi_tr)
+                                         criterion=crit, ccp_alpha=alpha,
+                                         random_state=0).fit(XD[tr], psi_tr)
             means = _leaf_means(tree, XD[tr], psi_tr)
             pred = np.array([means.get(int(k), float(psi_tr.mean()))
                              for k in tree.apply(XD[va])])
             rows.append({"fold": fold, "depth": depth, "leaf": leaf, "criterion": crit,
+                         "ccp_alpha": alpha,
                          "mae": float(np.mean(np.abs(pred - psi_va))),
                          "n_val": len(va)})
     return pd.DataFrame(rows)

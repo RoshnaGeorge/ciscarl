@@ -144,3 +144,19 @@ Full tables and decisions: `results/EVIDENCE_EXTENSION.md`, `gate31_*`,
   validation LCB (−0.142) and lowest SD (0.114); 845 has a higher mean assessment
   effect (+0.251) but worse LCB (−0.167) and 1.6× the variability; 965 is worst
   (−0.206). 730 retained on stability, not convention.
+
+## CART tuning and ensembles (Gates 45–47)
+
+* Gate 45: 540-configuration nested tuning on ACTG175 discovery selected
+  depth 5 / leaf 30 / squared error (nested MAE 0.85982 vs 0.86379 for the
+  frozen tree, rank 54 of 540). It was not adopted on pseudo-outcome error
+  alone.
+* Gate 46: no ensemble (random forest, extra trees, gradient boosting,
+  histogram GB, ridge stack) produced a capture gain with a 95% interval above
+  zero; costs were 4.8–65.9 s vs 0.07 s for CART. CART retained.
+* Gate 47: tuning on simulated subgroup performance selected depth 2 /
+  absolute error (validation LCB +0.0605/+0.0731). On the canonical ACTG175
+  split it selects 122 patients, validation LCB −0.210, assessment +0.282 and
+  abstains; the frozen tree selects 61, LCB −0.250, assessment +0.401. No
+  alternative produced a certifiable subgroup, so the frozen CART
+  (3 / 60 / squared error) remains.

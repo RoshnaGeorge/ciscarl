@@ -186,3 +186,34 @@ SHAP top five: wtkg 0.048, cd40 0.046, cd80 0.042, str2 0.017, homo 0.011.
 Transport: white-trained rule `cd40 ≤ 415.5 & homo ≤ 0.5`, support 74
 (fallback); white assessment +0.236 [−0.053, +0.525], non-white +0.223
 [+0.071, +0.375]. Descriptive, underpowered, not external validation.
+
+## Gates 45–47 — CART tuning and ensemble comparison
+
+Gate 45 (540 configurations, nested refit on ACTG175 discovery) found
+depth 5 / leaf 30 / squared error as the best pseudo-outcome predictor
+(nested MAE 0.85982 vs 0.86379 for the frozen depth 3 / leaf 60 / squared,
+rank 54 of 540). The gain is 0.0040 and the rule needs five conditions.
+
+Gate 46 (20 splits × 2 DGPs) compared CART with random forest, extra trees,
+gradient boosting, histogram gradient boosting and a ridge stack. Every
+ensemble was distilled into a depth-3 CART on out-of-fold predictions and
+scored with the same support floor and commitment rule. No ensemble had a
+capture gain with a 95% interval above zero (all p ≥ 0.40); costs were
+4.8–65.9 s per replication against 0.07 s for CART. The Gate 45 winner was
+significantly worse on capture (−0.224/−0.131) and purity (−0.090/−0.069).
+
+Gate 47 (48 configurations × 20 splits × 2 DGPs) selected on subgroup
+performance. Depth 2 / absolute_error had the best mean validation LCB
+(+0.0605 single, +0.0731 two) and capture, with purity 0.816/0.831.
+Depth 3 / leaf 60 / absolute_error gave LCB +0.0509/+0.0535 and purity
+0.865/0.817; frozen squared_error gave +0.0300/+0.0204 and purity
+0.856/0.786.
+
+Real-data check on the canonical split (`results/gate47_actg175.csv`):
+the depth-2 winner selects 122 patients with validation +0.039, LCB −0.210,
+assessment +0.282 and **abstains**; depth-3 absolute_error abstains; only a
+depth-4 / leaf-30 fallback with support 35 commits (assessment +0.092).
+
+**Decision:** the frozen CART (depth 3, leaf 60, squared error) remains. The
+tuning and ensemble alternatives either lose purity/capture, cost far more, or
+cannot produce a certifiable subgroup on ACTG175.

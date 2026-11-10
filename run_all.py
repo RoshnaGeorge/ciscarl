@@ -72,6 +72,9 @@ def full_commands(jobs=None):
         ("Gate 42  horizon grid", gate("gate42")),
         ("Gate 43  horizon inner CV", gate("gate43")),
         ("Gate 44  horizon stability", gate("gate44", *j)),
+        ("Gate 45  CART hyperparameter tuning", gate("gate45")),
+        ("Gate 46  ensemble versus CART", gate("gate46", "--reps", "20", *j)),
+        ("Gate 47  CART tuning on subgroup performance", gate("gate47", "--reps", "20", *j)),
     ]
     return cmds
 
